@@ -1,0 +1,5 @@
+/basic_concepts/data/
+/basic_concepts/.idea/
+/basic_concepts/src/__pycache__/
+/basic_concepts/tests/__pycache__/
+/basic_concepts/tests/.pytest_cache/

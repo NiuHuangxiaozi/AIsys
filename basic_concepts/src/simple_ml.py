@@ -173,12 +173,19 @@ def softmax_regression_epoch(X, y, theta, lr = 0.1, batch=100):
 
         Z=Xtheta_exp / np.repeat(np.sum(Xtheta_exp,axis=1,keepdims=True),repeats=Xtheta_exp.shape[1],axis=1)
 
+
         Ey=np.zeros((batch,num_classes))
 
         Ey[np.arange(0,batch),y_batch.flatten()]=1
 
-        gradient=np.dot(X_batch.T,(Z-Ey))/batch
+        # print("="*100)
+        # print(f"X is {X} \n")
+        # print(f"Z is {Z} \n")
+        # print(f"Ey is {Ey} \n")
+        # print("="*100)
 
+
+        gradient=np.dot(X_batch.T,(Z-Ey))/batch
         theta -= lr * gradient
 
     ### END YOUR CODE
@@ -308,13 +315,13 @@ def train_nn(X_tr, y_tr, X_te, y_te, hidden_dim = 500,
 
 
 if __name__ == "__main__":
-    X_tr, y_tr = parse_mnist("data/train-images-idx3-ubyte.gz",
-                             "data/train-labels-idx1-ubyte.gz")
-    X_te, y_te = parse_mnist("data/t10k-images-idx3-ubyte.gz",
-                             "data/t10k-labels-idx1-ubyte.gz")
+    X_tr, y_tr = parse_mnist("../data/train-images-idx3-ubyte.gz",
+                             "../data/train-labels-idx1-ubyte.gz")
+    X_te, y_te = parse_mnist("../data/t10k-images-idx3-ubyte.gz",
+                             "../data/t10k-labels-idx1-ubyte.gz")
 
     print("Training softmax regression")
-    train_softmax(X_tr, y_tr, X_te, y_te, epochs=10, lr = 0.1)
+    train_softmax(X_tr, y_tr, X_te, y_te, epochs=10, lr = 0.1,cpp=True)
 
-    print("\nTraining two layer neural network w/ 100 hidden units")
-    train_nn(X_tr, y_tr, X_te, y_te, hidden_dim=100, epochs=20, lr = 0.2)
+    # print("\nTraining two layer neural network w/ 100 hidden units")
+    # train_nn(X_tr, y_tr, X_te, y_te, hidden_dim=100, epochs=20, lr = 0.2)
